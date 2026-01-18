@@ -2,6 +2,8 @@ A fullstack program that takes advantage of an ESP32 Microcontroller to allow th
 ...
 More to come
 ...
+
+WRITE INFORMATION ABOUT WHERE PHP FILES GO ALONG WITH OTHER INFO FOR SETUP
 AUTHORS
 -ADAM ROY
 -ESTEBAN MARTE

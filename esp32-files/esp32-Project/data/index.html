@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html> 
+    <head>
+        <title>Soil Monitor</title>
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+            <h1>
+                <img src="images/Leaf.jpeg" width="100">              
+                House Plant Monitor    
+            </h1>
+
+        <br>
+        
+        <p>LED for Testing: <strong> %STATE% </strong></p>
+        <p><a href="/on"><button class="button">ON</button></a></p>
+        <p><a href="/off"><button class="button button2">OFF</button></a></p>
+
+        <p>Soil dryness: <strong id="soil">%SOIL%</strong></p>
+        <script>
+        setInterval(() => {
+            fetch("/soil")
+                .then(response => response.text())
+                .then(data => { document.getElementById("soil").innerText = data; });
+        }, 1000);
+        </script>
+
+        <p>Temperature: <strong id="temperature">%TEMPERATURE%</strong></p>
+        <script>
+        setInterval(() => {
+            fetch("/temperature")
+                .then(response => response.text())
+                .then(data => { document.getElementById("temperature").innerText = data;});
+        }, 1000)
+        </script>
+
+        <p>Humidity: <strong id="humidity">%HUMIDITY%</strong></p>
+        <script>
+        setInterval(() => {
+            fetch("/humidity")
+                .then(response => response.text())
+                .then(data => { document.getElementById("humidity").innerText = data;});
+        }, 1000)
+        </script>
+        
+
+        <div class="table-container">
+            <table border="1">
+            <thead>
+                <tr>
+                    <th>Date / Time</th>
+                    <th>Temperature</th>
+                    <th>Humidity</th>
+                    <th>Soil Dryness</th>
+                </tr>
+            </thead>
+            <tbody id="tableBody"></tbody>
+            </table>
+        </div>
+        
+
+        <script>
+            fetch("http://172.24.147.2/houseplant_project/fetch_data.php")
+            .then(response => response.json())
+            .then(rows => {
+                const tbody = document.getElementById("tableBody");
+                tbody.innerHTML = "";
+
+                rows.forEach(row => {
+                    const tr = document.createElement("tr");
+
+                    tr.innerHTML = `
+                        <td>${row.Timestamp}</td>
+                        <td>${row.Temperature}</td>
+                        <td>${row.Humidity}</td>
+                        <td>${row.Soil_Dryness}</td>
+                        `;
+                    
+                        tbody.appendChild(tr);
+                })
+                  
+            })
+        </script>
+
+        <a href="mailto:adam.roy724@gmail.com"
+        title="To Adam">
+        Send me an email
+        </a>
+
+    </body>
+</html>
