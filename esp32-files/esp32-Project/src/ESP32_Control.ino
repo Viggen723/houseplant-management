@@ -158,12 +158,12 @@ void loop()
   float temp = tempSum / 10.0;
 
   // Ranges to reduce anomalies and defaulting to 0.0
-  if (humid <= 100 || humid > 0) 
+  if (humid <= 100 && humid > 0) 
   {            
     humidity = String(humid, 1); 
   }
 
-  if (temp <= 60 || temp > -10)
+  if (temp <= 60 && temp > -10)
   {
     temperature = String(temp, 1);
   }
